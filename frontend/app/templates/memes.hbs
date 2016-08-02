@@ -1,7 +1,11 @@
 {{!-- MEMES START --}}
 <div id="masonry" class="memes">
 {{#each model as |model|}}
-  <img class="meme" src="{{model.image}}"/>
+  <div class="panel">
+    <div class="panel-content">
+      <img class="meme" src="{{model.image}}"/>
+    </div>
+  </div>
   {{!-- <div class="meme"> --}}
     {{!-- <h3>{{model.title}}</h3>
   </div> --}}
