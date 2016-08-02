@@ -7,6 +7,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('memes', { path: '/'});
+  this.route('upload');
 });
 
 export default Router;

@@ -2,15 +2,12 @@
 {{#paper-toolbar}}
   <div class="md-toolbar-tools">
     <div class="left"> 
-      {{#paper-button action=(transition-to 'memes')}}<i class="fa fa-fighter-jet"></i>{{/paper-button}}
+      {{#paper-button class="jet-logo" action=(transition-to 'memes')}}<i class="fa fa-fighter-jet"></i>{{/paper-button}}
+      {{#link-to "memes" class="meme-button"}}Memes{{/link-to}}
     </div>
     <div class="right"> 
-      {{#paper-button class="upload" action=(transition-to 'memes')}}Upload{{/paper-button}}
+      {{#link-to "upload" class="upload"}}Upload{{/link-to}}
     </div>
-  </div>
-  <div class="md-toolbar-tools">  
-    {{#paper-button class="invisible" action=(transition-to 'memes')}}<i class="fa fa-fighter-jet"></i>{{/paper-button}}  
-    {{#paper-button class="meme-button" action=(transition-to 'memes')}}Memes{{/paper-button}}
   </div>
 {{/paper-toolbar}}
 {{!-- NAVBAR END --}}
