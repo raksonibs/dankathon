@@ -42,28 +42,57 @@ body, html {
 
 
 .memes {
-  display: -webkit-flex;
+  // display: -webkit-flex;
+  // display: flex;
+  // -webkit-align-items: center;
+  // align-items: center;
+  // -webkit-justify-content: center;
+  // justify-content: center;
+  // /* You can set flex-wrap and flex-direction individually */
+  // -webkit-flex-direction: row;
+  // flex-direction: row;
+  // -webkit-flex-wrap: wrap;
+  // flex-wrap: wrap;
+  // /* Or do it all in one line with flex flow */
+  // -webkit-flex-flow: row wrap;
+  // flex-flow: row wrap;
+  // /* tweak the where items line up on the row */
+  // /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
+  // -webkit-align-content: flex-end;
+  // align-content: flex-end;
+  // max-width: 69%;
+  display: -ms-flexbox;
+  -ms-flex-direction: column;
+  -ms-flex-wrap: wrap;
   display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  /* You can set flex-wrap and flex-direction individually */
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex-wrap: wrap;
+  flex-direction: column;
   flex-wrap: wrap;
-  /* Or do it all in one line with flex flow */
-  -webkit-flex-flow: row wrap;
-  flex-flow: row wrap;
-  /* tweak the where items line up on the row */
-  /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
-  -webkit-align-content: flex-end;
-  align-content: flex-end;
+  height: 100vw;
+  width: 65%;
+  font-size: 0; 
   
   .meme {
+    width: 30%;
+    margin: 5px;
     min-width: 200px;
     min-height: 100px;
     border: 1px solid lightgrey;
+    transition: .8s opacity;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // &:hover {
+  //   .meme {
+  //     opacity: 0.3;
+  //   }
+  // }
+}
+
+@media screen and (max-width: 800px) {
+  .memes {
+    width: 25% !important;
   }
 }
