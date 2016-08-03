@@ -17,9 +17,13 @@ defmodule Backend.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Backend, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+    [
+      mod: {Backend, []},
+      applications: [
+                      :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
+                      :phoenix_ecto, :postgrex, :ex_aws, :httpoison
+                    ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +43,11 @@ defmodule Backend.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:ja_serializer, "~> 0.9.0"},
-      {:cors_plug, "~> 1.1"}]
+     {:cors_plug, "~> 1.1"},
+     {:arc, "~> 0.5.2"},
+     {:ex_aws, "~> 0.4.10"}, # Required if using Amazon S3
+     {:httpoison, "~> 0.7"},  # Required if using Amazon S3
+     {:poison, "~> 1.2"}]   # Required if using Amazon S3]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
