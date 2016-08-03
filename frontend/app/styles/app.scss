@@ -1,7 +1,8 @@
 @import 'ember-paper';
 $background-colour: #000;
 $background-text-colour: #fff;
-$primary-button-colour: red;
+$primary-button-colour: #e60000;
+$primary-button-colour-shadow: #cc3d3d;
 
 body, html {
   margin: 0;
@@ -11,7 +12,8 @@ body, html {
   color: $background-text-colour;
   font-family: 'Roboto', sans-serif;
 
-  .memes {
+  .meme_lettering {
+    display: inline-block;
   }
 }
 
@@ -35,6 +37,24 @@ body, html {
       margin-top: 5px;
       position: relative;
       left: 45vw;
+
+      // border-left: 12px solid #cc3d3d;
+      // border-right: 4px solid #cc3d3d;
+      // border-bottom: 12px solid #cc3d3d;
+      -webkit-transition: all 0.1s;
+      -moz-transition: all 0.1s;
+      transition: all 0.1s;
+      
+      -webkit-box-shadow: 0px 9px 0px $primary-button-colour-shadow;
+            -moz-box-shadow: 0px 9px 0px $primary-button-colour-shadow;
+            box-shadow: 0px 9px 0px $primary-button-colour-shadow;
+
+      &:active {
+        -webkit-box-shadow: 0px 2px 0px $primary-button-colour-shadow;
+        -moz-box-shadow: 0px 2px 0px $primary-button-colour-shadow;
+        box-shadow: 0px 2px 0px $primary-button-colour-shadow;
+        top: 7px;
+      }
     }
   }
 
@@ -45,7 +65,54 @@ body, html {
   .meme-button {
     font-size:  3rem;
     transition: all 1s ease-in-out;
+
+    span {
+      padding: 0;
+      margin: 0;
+      transition: all 1s ease-in-out;
+
+      &.letter {
+        &.coloured {
+          -webkit-animation: color_change 1s infinite alternate;
+          -moz-animation: color_change 1s infinite alternate;
+          -ms-animation: color_change 1s infinite alternate;
+          -o-animation: color_change 1s infinite alternate;
+          animation: color_change 1s infinite alternate;
+        }
+      }
+    }
   }
+}
+
+@-webkit-keyframes color_change {
+  0% { background-color: blue; }
+  25% { background-color: red; }
+  50% { background-color: lightgreen; }
+  75% { background-color: orange; }
+}
+@-moz-keyframes color_change {
+  0% { background-color: blue; }
+  25% { background-color: red; }
+  50% { background-color: lightgreen; }
+  75% { background-color: orange; }
+}
+@-ms-keyframes color_change {
+  0% { background-color: blue; }
+  25% { background-color: red; }
+  50% { background-color: lightgreen; }
+  75% { background-color: orange; }
+}
+@-o-keyframes color_change {
+  0% { background-color: blue; }
+  25% { background-color: red; }
+  50% { background-color: lightgreen; }
+  75% { background-color: orange; }
+}
+@keyframes color_change {
+  0% { background-color: blue; }
+  25% { background-color: red; }
+  50% { background-color: lightgreen; }
+  75% { background-color: orange; }
 }
 
 .invisible {
@@ -56,6 +123,7 @@ body, html {
   column-count: 4;
   column-gap: 0;
 }
+
 .panel {
   break-inside: avoid;
   padding: 5px;
