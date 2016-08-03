@@ -10,6 +10,7 @@ defmodule Backend.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, [origin: "*"]
     plug :accepts, ["json", "json-api"]
   end
 
@@ -23,8 +24,10 @@ defmodule Backend.Router do
   scope "/api", Backend do
     pipe_through :api
 
+    options "/upload", MemeController, :options
     get "/sign", MemeController, :sign
     post "/upload", MemeController, :upload
+    options "/memes", MemeController, :options
     resources "/memes", MemeController, except: [:new, :edit]
   end
 end

@@ -29,6 +29,8 @@ module.exports = function(environment) {
     ENV['ember-cli-mirage'] = {
       enabled: false
     }
+
+     ENV.serverURL = 'http://localhost:4000';
   }
 
   if (environment === 'test') {
@@ -50,7 +52,6 @@ module.exports = function(environment) {
 
   }
 
-  ENV.serverURL = 'http://localhost:4000';
   ENV.apiBaseURL = ENV.serverURL + '/' + ENV.apiNamespace;
 
   return ENV;

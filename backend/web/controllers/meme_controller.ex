@@ -1,3 +1,5 @@
+require IEx
+
 defmodule Backend.MemeController do
   use Backend.Web, :controller
 
@@ -61,6 +63,7 @@ defmodule Backend.MemeController do
   end
 
   def upload(conn, _params) do 
+    IEx.pry
     conn 
     # |> create(conn, _params)
   end

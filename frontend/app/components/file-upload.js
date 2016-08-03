@@ -1,20 +1,21 @@
 import Ember from 'ember';
 import EmberUploader from 'ember-uploader';
+import ENV from '../config/environment';
 
 export default EmberUploader.FileField.extend({
   classNames: ['upload'],
   signingUrl: '',
 
   filesDidChange: function(files) {
-    // const uploader = EmberUploader.Uploader.create({
-    //   // url: this.get('url'),
-    //   url: '/upload',
-    //   method: 'POST'
-    // });
-
-    const uploader = EmberUploader.S3Uploader.create({
-      signingUrl: this.get('signingUrl')
+    const uploader = EmberUploader.Uploader.create({
+      // url: this.get('url'),
+      url: ENV.apiBaseURL + '/upload',
+      method: 'POST'
     });
+
+    // const uploader = EmberUploader.S3Uploader.create({
+    //   signingUrl: this.get('signingUrl')
+    // });
 
     console.log('should be calling update');
     console.log(files);
@@ -28,9 +29,9 @@ export default EmberUploader.FileField.extend({
     uploader.on('didUpload', e => {
       // Handle finished upload
       console.log('finished uploading');
-       let uploadedUrl = $(response).find('Location')[0].textContent;
-      // http://yourbucket.s3.amazonaws.com/file.png
-      uploadedUrl = decodeURIComponent(uploadedUrl);
+      //  let uploadedUrl = $(response).find('Location')[0].textContent;
+      // // http://yourbucket.s3.amazonaws.com/file.png
+      // uploadedUrl = decodeURIComponent(uploadedUrl);
     });
 
     uploader.on('didError', (jqXHR, textStatus, errorThrown) => {
@@ -40,7 +41,7 @@ export default EmberUploader.FileField.extend({
 
     if (!Ember.isEmpty(files)) {
       // this second argument is optional and can to be sent as extra data with the upload
-      // uploader.upload(files[0], { whateverObject });
+      uploader.upload(files[0], { });
     }
   }
 });
