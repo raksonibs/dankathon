@@ -1,0 +1,48 @@
+@media screen and (max-width: 1000px) {
+  .md-toolbar-tools {
+    .right {
+      .upload {
+        font-size: 2rem;
+        padding: 10px;
+        left: 30vw;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .md-toolbar-tools {
+    .right {
+      .upload {
+        font-size: 1.5rem;
+        padding: 10px;
+        left: 25vw;
+      }
+    }
+
+    .meme-button {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .md-toolbar-tools {
+    .left {
+      .jet-logo {
+        display: none;        
+      }
+
+      .meme-button {
+        font-size: 2rem;
+      }
+    }
+    .right {
+      .upload {
+        font-size: 1.5rem;
+        padding: 5px;
+        left: 15vw;
+      }
+    }
+  }
+}

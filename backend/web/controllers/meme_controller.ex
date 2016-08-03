@@ -56,4 +56,13 @@ defmodule Backend.MemeController do
     send_resp(conn, :no_content, "")
   end
 
+  def sign(conn, _params) do 
+    conn
+  end
+
+  def upload(conn, _params) do 
+    conn 
+    # |> create(conn, _params)
+  end
+
 end

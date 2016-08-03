@@ -23,6 +23,8 @@ defmodule Backend.Router do
   scope "/api", Backend do
     pipe_through :api
 
+    get "/sign", MemeController, :sign
+    post "/upload", MemeController, :upload
     resources "/memes", MemeController, except: [:new, :edit]
   end
 end
