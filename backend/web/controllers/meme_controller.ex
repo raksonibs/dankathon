@@ -6,6 +6,8 @@ defmodule Backend.MemeController do
   alias Backend.Meme
   alias JaSerializer.Params
 
+  alias Backend.Repo
+
   plug :scrub_params, "data" when action in [:create, :update]
 
   def index(conn, _params) do
@@ -67,10 +69,13 @@ defmodule Backend.MemeController do
     # conn 
     # |> Backend.Gif.store(%Plug.Upload{})
     Backend.Gif.store(params["file"])
-    # Avatar.url({"selfie.png", current_user}, :thumb)
+    url = Backend.Gif.url({params["file"].file_name, nil}, :original)
+    number = round(:random.uniform * 100000)
+    random_string = Integer.to_string(number, 36)
+    meme_file = params["file"].file_name
+    meme = Repo.get_by(Meme, image: url) || Repo.insert!(%Meme{image: url, rating: 0, title: random_string})
 
-    memes = Repo.all(Meme)
-    render(conn, "index.json", data: memes)
+    render(conn, "show.json", data: meme)
   end
 
 end

@@ -36,6 +36,10 @@ config :ex_aws,
   access_key_id: "AKIAIDNG2ASSNAZQH5LQ",
   secret_access_key: "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"
 
+# config :ex_aws,
+#   access_key_id: [{:system, "AKIAIDNG2ASSNAZQH5LQ"}, :instance_role],
+#   secret_access_key: [{:system, "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"}, :instance_role]
+
   # config :ex_aws,
   # access_key_id: "my_access_key_id",
   # secret_access_key: "my_secret_access_key",
