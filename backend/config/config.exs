@@ -33,8 +33,18 @@ config :arc,
   bucket: "dankathon"
 
 config :ex_aws,
-  access_key_id: [{:system, "AKIAIDNG2ASSNAZQH5LQ"}, :instance_role],
-  secret_access_key: [{:system, "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"}, :instance_role]
+  access_key_id: "AKIAIDNG2ASSNAZQH5LQ",
+  secret_access_key: "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"
+
+  # config :ex_aws,
+  # access_key_id: "my_access_key_id",
+  # secret_access_key: "my_secret_access_key",
+  # region: "eu-central-1",
+  # s3: [
+  #   scheme: "https://",
+  #   host: "s3.eu-central-1.amazonaws.com",
+  #   region: "eu-central-1"
+  # ]
   
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

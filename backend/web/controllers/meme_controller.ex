@@ -62,10 +62,15 @@ defmodule Backend.MemeController do
     conn
   end
 
-  def upload(conn, _params) do 
-    IEx.pry
-    conn 
-    # |> create(conn, _params)
+  def upload(conn, params) do
+    # how to do this in the phoenix way?
+    # conn 
+    # |> Backend.Gif.store(%Plug.Upload{})
+    Backend.Gif.store(params["file"])
+    # Avatar.url({"selfie.png", current_user}, :thumb)
+
+    memes = Repo.all(Meme)
+    render(conn, "index.json", data: memes)
   end
 
 end
