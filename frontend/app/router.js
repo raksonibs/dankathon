@@ -6,7 +6,9 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('memes', { path: '/'});
+  this.route('memes', { path: '/'}, function() {
+    this.route('show', { path: '/memes/:meme_id'});
+  });
   this.route('upload');
 });
 

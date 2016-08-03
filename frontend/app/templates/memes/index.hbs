@@ -3,15 +3,14 @@
 {{#each model as |meme|}}
   <div class="panel">
     <div class="panel-content">
-      <img class="meme" src="{{meme.image}}"/>
-      <div class="meme-info">
+      {{#link-to "memes.show" meme}}
+        <img class="meme" src="{{meme.image}}"/>
+      {{/link-to}}
+      {{!-- <div class="meme-info">
         <h3>{{meme.title}}</h3>
-      </div>
+      </div> --}}
     </div>
   </div>
-  {{!-- <div class="meme"> --}}
-    {{!-- <h3>{{model.title}}</h3>
-  </div> --}}
 {{/each}}
 </div>
 {{!-- MEMES END --}}
