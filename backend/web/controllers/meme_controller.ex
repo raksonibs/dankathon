@@ -1,6 +1,7 @@
 require IEx
 
 defmodule Backend.MemeController do
+  import Ecto.Query, only: [from: 2]
   use Backend.Web, :controller
 
   alias Backend.Meme
@@ -10,8 +11,14 @@ defmodule Backend.MemeController do
 
   plug :scrub_params, "data" when action in [:create, :update]
 
-  def index(conn, _params) do
-    memes = Repo.all(Meme)
+  def index(conn, params) do
+    if params["title"] != "" do 
+      title = params["title"]
+      query = from m in Meme, where: m.title == ^title
+      memes = Repo.all(query)
+    else
+      memes = Repo.all(Meme)
+    end 
     render(conn, "index.json", data: memes)
   end
 
