@@ -1,4 +1,6 @@
+{{paper-progress-linear if isSearching "visible"}}
+
 <div class="upload-form">
   <h1> Upload a Meme </h1>
-  {{file-upload url="/upload_file"}}
+  {{file-upload url="/upload_file" isSearchingUpdate=(route-action 'isSearchingUpdate')}}
 </div>

@@ -7,6 +7,8 @@ export default EmberUploader.FileField.extend({
   signingUrl: '',
 
   filesDidChange: function(files) {
+    this.get('isSearchingUpdate')();
+    
     const uploader = EmberUploader.Uploader.create({
       // url: this.get('url'),
       url: ENV.apiBaseURL + '/upload',
@@ -28,6 +30,11 @@ export default EmberUploader.FileField.extend({
 
     uploader.on('didUpload', e => {
       // Handle finished upload
+      var thisState = this;
+      setTimeout(function() {
+
+        thisState.get('isSearchingUpdate')();
+      }, 10000)
       console.log('finished uploading');
       //  let uploadedUrl = $(response).find('Location')[0].textContent;
       // // http://yourbucket.s3.amazonaws.com/file.png

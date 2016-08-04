@@ -15,6 +15,18 @@ body, html {
   .meme_lettering {
     display: inline-block;
   }
+
+  .gutters {
+    margin: 0 50px;
+  }
+}
+
+md-progress-linear {
+  display: none;
+  
+  &.visible {
+    display: block;
+  }
 }
 
 .md-toolbar-tools {
