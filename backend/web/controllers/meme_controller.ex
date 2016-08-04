@@ -68,14 +68,21 @@ defmodule Backend.MemeController do
     # how to do this in the phoenix way?
     # conn 
     # |> Backend.Gif.store(%Plug.Upload{})
-    Backend.Gif.store(params["file"])
-    url = Backend.Gif.url({params["file"].file_name, nil}, :original)
+    
     number = round(:random.uniform * 100000)
     random_string = Integer.to_string(number, 36)
-    meme_file = params["file"].file_name
-    meme = Repo.get_by(Meme, image: url) || Repo.insert!(%Meme{image: url, rating: 0, title: random_string})
-
-    render(conn, "show.json", data: meme)
+    meme_file = params["file"].filename
+    meme = Repo.get_by(Meme, image: meme_file) || Repo.insert!(%Meme{image: meme_file, rating: 0, title: random_string})
+    Backend.Gif.store({params["file"], meme})
+    changeset = Meme.changeset(meme, %{image: Backend.Gif.url({meme_file, meme}, :original)})
+    case Repo.update(changeset) do
+      {:ok, task}         -> render(conn, "show.json", data: meme)
+      {:error, changeset} -> 
+          conn
+        |> put_status(:unprocessable_entity)
+        |> render(Backend.ChangesetView, "error.json", changeset: changeset)
+    end
+   
   end
 
 end

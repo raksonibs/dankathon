@@ -9,6 +9,7 @@ defmodule Backend.Gif do
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
 
   def acl(:thumb, _), do: :public_read
+  def __storage, do: Arc.Storage.Local
 
   def validate({file, _}) do   
     file_extension = file.file_name |> Path.extname |> String.downcase
@@ -25,7 +26,11 @@ defmodule Backend.Gif do
   end
 
   def storage_dir(_, {file, meme}) do
-    "uploads/#{file.file_name}"
+    "uploads/gifs/#{meme.id}"
+  end
+
+  def default_url(:thumb) do
+    "https://placehold.it/100x100"
   end
 
   # Provide a default URL if there hasn't been a file uploaded
