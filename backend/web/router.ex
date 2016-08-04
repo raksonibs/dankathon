@@ -31,5 +31,7 @@ defmodule Backend.Router do
     get "/sign", MemeController, :sign
     post "/upload", MemeController, :upload
     resources "/memes", MemeController, except: [:new, :edit]
+    resources "/hash_tags", HashTagController, except: [:new, :edit]
+    resources "/tags", TagController, except: [:new, :edit]
   end
 end

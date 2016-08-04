@@ -12,14 +12,16 @@ defmodule Backend.MemeController do
   plug :scrub_params, "data" when action in [:create, :update]
 
   def index(conn, params) do
-    if params["title"] != "" do 
+    if params[:title] != "" and params[:title] != nil do
       title = params["title"]
-      query = from m in Meme, where: m.title == ^title
-      memes = Repo.all(query)
+      query = from m in Meme, where: m.title == ^title, preload: [:hash_tags, :tags]      
     else
-      memes = Repo.all(Meme)
-    end 
+      query = from meme in Meme, preload: [:hash_tags, :tags]
+    end
+
+    memes = Repo.all(query)
     render(conn, "index.json", data: memes)
+    
   end
 
   def create(conn, %{"data" => data = %{"type" => "meme", "attributes" => _meme_params}}) do
@@ -76,14 +78,14 @@ defmodule Backend.MemeController do
     # conn 
     # |> Backend.Gif.store(%Plug.Upload{})
     
-    number = round(:random.uniform * 100000)
+    number = round(:rand.uniform * 100000)
     random_string = Integer.to_string(number, 36)
     meme_file = params["file"].filename
     meme = Repo.get_by(Meme, image: meme_file) || Repo.insert!(%Meme{image: meme_file, rating: 0, title: random_string})
     Backend.Gif.store({params["file"], meme})
     changeset = Meme.changeset(meme, %{image: Backend.Gif.url({meme_file, meme}, :original)})
     case Repo.update(changeset) do
-      {:ok, task}         -> render(conn, "show.json", data: meme)
+      {:ok, meme}         -> render(conn, "show.json", data: meme)
       {:error, changeset} -> 
           conn
         |> put_status(:unprocessable_entity)

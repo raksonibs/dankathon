@@ -6,6 +6,9 @@ defmodule Backend.Meme do
     field :image, :string
     field :rating, :integer
 
+    has_many :hash_tags, Backend.HashTag
+    has_many :tags, Backend.Tag
+
     timestamps()
   end
 
