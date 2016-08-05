@@ -1,6 +1,8 @@
 {{!-- MEMES START --}}
 
-{{input value=title}}
+<div class="search-bar">
+  {{input value=title placeholder="Search into the abyss"}}
+</div>
 
 <div id="masonry" class="memes">
 {{#each model as |meme|}}
@@ -10,9 +12,6 @@
         {{#link-to "memes.show" meme}}
           <img class="meme" src={{full-url meme.image}}/>
         {{/link-to}}
-        <div class="meme-info">
-          <h3>{{meme.title}}</h3>
-        </div>
       </div>
     </div>
   {{/if}}

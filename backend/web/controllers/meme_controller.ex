@@ -12,16 +12,15 @@ defmodule Backend.MemeController do
   plug :scrub_params, "data" when action in [:create, :update]
 
   def index(conn, params) do
-    if params[:title] != "" and params[:title] != nil do
-      title = params["title"]
-      query = from m in Meme, where: m.title == ^title, preload: [:hash_tags, :tags]      
+    if params["title"] != "" and params["title"] != nil do
+      title = String.downcase(params["title"])
+      query = from m in Meme, where:  fragment("lower(?)", m.title) == ^title
     else
-      query = from meme in Meme, preload: [:hash_tags, :tags]
+      query = from meme in Meme
     end
 
     memes = Repo.all(query)
     render(conn, "index.json", data: memes)
-    
   end
 
   def create(conn, %{"data" => data = %{"type" => "meme", "attributes" => _meme_params}}) do
