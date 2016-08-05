@@ -16,4 +16,12 @@ defmodule Backend.Tag do
     |> cast(params, [:title])
     |> validate_required([:title])
   end
+
+  def alphabetical(query) do 
+    from t in query, order_by: t.name
+  end
+
+  def names_and_ids(query) do 
+    from t in query, select: {t.name, t.id}
+  end
 end

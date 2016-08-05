@@ -10,6 +10,21 @@ defmodule Backend.MemeController do
   alias Backend.Repo
 
   plug :scrub_params, "data" when action in [:create, :update]
+  plug :load_hash_tags when action in [:index, :show, :create, :update]
+  plug :load_tags when action in [:index, :show, :create, :update]
+
+  def meme_tags(meme) do 
+    assoc(meme, :tags)
+  end
+
+  def meme_hash_tags(meme) do 
+    assoc(meme, :hash_tags)
+  end
+
+  # def action(conn, _) do 
+  #   apply(__MODULE__, action_name(conn),
+  #         [conn, conn.params, conn.assigns.current_user])
+  # end
 
   def index(conn, params) do
     if params["title"] != "" and params["title"] != nil do
@@ -91,6 +106,24 @@ defmodule Backend.MemeController do
         |> render(Backend.ChangesetView, "error.json", changeset: changeset)
     end
    
+  end
+
+  defp load_hash_tags(conn, _) do 
+    tags = load(HashTag)
+    assign(conn, :hash_tags, tags)
+  end
+
+  defp load_tags(conn, _) do 
+    tags = load(Tag)
+    assign(conn, :tags, tags)
+  end
+
+  def load(module_name) do 
+    query = module_name 
+      |> module_name.alphabetical
+      |> module_name.names_and_ids 
+
+    tags = Repo.all query 
   end
 
 end

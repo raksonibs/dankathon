@@ -20,4 +20,16 @@ defmodule Backend.Meme do
     |> cast(params, [:title, :image, :rating])
     |> validate_required([:title, :image, :rating])
   end
+
+  def count_tags() do 
+    Repo.one from u in Meme,
+            join: v in assoc(u, :tags),
+            join: h in assoc(u, :hash_tags),
+            select: count(v + h)
+    # select: {v, h}
+  end
+
+  def meme_count(query) do 
+    from u in query, select: count(u.id)
+  end
 end
