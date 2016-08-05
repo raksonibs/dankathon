@@ -6,8 +6,8 @@ defmodule Backend.Meme do
     field :image, :string
     field :rating, :integer
 
-    has_many :hash_tags, Backend.HashTag
-    has_many :tags, Backend.Tag
+    many_to_many :hash_tags, Backend.HashTag, join_through: "memes_hash_tags"
+    many_to_many :tags, Backend.Tag, join_through: "memes_tags"
 
     timestamps()
   end

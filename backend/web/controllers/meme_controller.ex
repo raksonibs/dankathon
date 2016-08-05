@@ -19,7 +19,7 @@ defmodule Backend.MemeController do
       query = from meme in Meme
     end
 
-    memes = Repo.all(query)
+    memes = Repo.all(query) |> Repo.preload([:tags]) |> Repo.preload([:hash_tags])
     render(conn, "index.json", data: memes)
   end
 
@@ -40,7 +40,7 @@ defmodule Backend.MemeController do
   end
 
   def show(conn, %{"id" => id}) do
-    meme = Repo.get!(Meme, id)
+    meme = Repo.get!(Meme, id) |> Repo.preload([:tags]) |> Repo.preload([:hash_tags])
     render(conn, "show.json", data: meme)
   end
 

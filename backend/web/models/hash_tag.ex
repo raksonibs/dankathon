@@ -3,7 +3,7 @@ defmodule Backend.HashTag do
 
   schema "hash_tags" do
     field :title, :string
-    belongs_to :meme, Backend.Meme
+    many_to_many :memes, Backend.Meme, join_through: "memes_hash_tags"
 
     timestamps()
   end
