@@ -3,7 +3,7 @@ defmodule Backend.HashTag do
 
   schema "hash_tags" do
     field :title, :string
-    many_to_many :memes, Backend.Meme, join_through: "memes_hash_tags"
+    many_to_many :memes, Backend.Meme, join_through: "memes_hash_tags", on_delete: :delete_all, on_replace: :delete
 
     timestamps()
   end
@@ -18,10 +18,10 @@ defmodule Backend.HashTag do
   end
 
   def alphabetical(query) do 
-    from t in query, order_by: t.name
+    from t in query, order_by: t.title
   end
 
-  def names_and_ids(query) do 
-    from t in query, select: {t.name, t.id}
+  def titles_and_ids(query) do 
+    from t in query, select: {t.title, t.id}
   end
 end

@@ -8,6 +8,8 @@ defmodule Backend.MemeController do
   alias JaSerializer.Params
 
   alias Backend.Repo
+  alias Backend.HashTag
+  alias Backend.Tag
 
   plug :scrub_params, "data" when action in [:create, :update]
   plug :load_hash_tags when action in [:index, :show, :create, :update]
@@ -34,7 +36,10 @@ defmodule Backend.MemeController do
       query = from meme in Meme
     end
 
-    memes = Repo.all(query) |> Repo.preload([:tags]) |> Repo.preload([:hash_tags])
+    memes = Meme 
+            |> Meme.with_tags
+            |> Repo.all()
+
     render(conn, "index.json", data: memes)
   end
 
@@ -55,7 +60,10 @@ defmodule Backend.MemeController do
   end
 
   def show(conn, %{"id" => id}) do
-    meme = Repo.get!(Meme, id) |> Repo.preload([:tags]) |> Repo.preload([:hash_tags])
+    meme = Meme 
+            |> Meme.with_tags
+            |> Repo.get!(id) 
+            
     render(conn, "show.json", data: meme)
   end
 
@@ -121,7 +129,7 @@ defmodule Backend.MemeController do
   def load(module_name) do 
     query = module_name 
       |> module_name.alphabetical
-      |> module_name.names_and_ids 
+      |> module_name.titles_and_ids 
 
     tags = Repo.all query 
   end

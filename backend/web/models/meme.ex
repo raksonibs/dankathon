@@ -6,8 +6,8 @@ defmodule Backend.Meme do
     field :image, :string
     field :rating, :integer
 
-    many_to_many :hash_tags, Backend.HashTag, join_through: "memes_hash_tags"
-    many_to_many :tags, Backend.Tag, join_through: "memes_tags"
+    many_to_many :hash_tags, Backend.HashTag, join_through: "memes_hash_tags", on_delete: :delete_all, on_replace: :delete
+    many_to_many :tags, Backend.Tag, join_through: "memes_tags", on_delete: :delete_all, on_replace: :delete
 
     timestamps()
   end
@@ -25,8 +25,12 @@ defmodule Backend.Meme do
     Repo.one from u in Meme,
             join: v in assoc(u, :tags),
             join: h in assoc(u, :hash_tags),
-            select: count(v + h)
+            select: count(v.id)
     # select: {v, h}
+  end
+
+  def with_tags(query) do 
+    from q in query, preload: [:tags, :hash_tags]
   end
 
   def meme_count(query) do 
