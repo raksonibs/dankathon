@@ -1,0 +1,9 @@
+{{#if isModalVisible}}
+  {{#modal-dialog close="toggleModal"
+                  targetAttachment="center"
+                  translucentOverlay=true}}
+    <img class="meme" src={{full-url meme.image}}/>
+    {{meme.title}}
+    {{meme.slug}}
+  {{/modal-dialog}}
+{{/if}}

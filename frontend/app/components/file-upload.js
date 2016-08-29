@@ -31,11 +31,9 @@ export default EmberUploader.FileField.extend({
     uploader.on('didUpload', e => {
       // Handle finished upload
       var thisState = this;
-      setTimeout(function() {
-
-        thisState.get('isSearchingUpdate')();
-      }, 10000)
+      
       console.log('finished uploading');
+      this.transitionTo('memes')
       //  let uploadedUrl = $(response).find('Location')[0].textContent;
       // // http://yourbucket.s3.amazonaws.com/file.png
       // uploadedUrl = decodeURIComponent(uploadedUrl);
