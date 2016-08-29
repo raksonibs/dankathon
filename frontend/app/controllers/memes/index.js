@@ -4,10 +4,11 @@ export default Ember.Controller.extend({
   queryParams: ['title'],
   title: "",
   isModalVisible: false,
-  actions: {
-    // toggleModal(meme) {
-    //   console.log('making meme modal visible');
-    //   this.set('isModalVisible', true);
-    // }
+  init() {
+    let promise = this.get('promise').start();
+    promise.addItem("test");
+    console.log(promise);
+    promise.addDelayedItem("cat");
+    console.log(promise);
   }
 });
