@@ -9,10 +9,9 @@
   {{#if (image-exists meme.image)}}
     <div class="panel">
       <div class="panel-content">
-        <img class="meme" src={{full-url meme.image}} onclick={{action 'toggleModal' meme}}/>
         {{meme-modal
           meme=meme
-          isVisible=isModalVisible
+          isModalVisible=false
         }}
       </div>
     </div>

@@ -1,9 +1,13 @@
+<img class="meme" src={{full-url meme.image}} onclick={{action 'toggleModal'}}/>
+
 {{#if isModalVisible}}
-  {{#modal-dialog close="toggleModal"
-                  targetAttachment="center"
-                  translucentOverlay=true}}
-    <img class="meme" src={{full-url meme.image}}/>
-    {{meme.title}}
-    {{meme.slug}}
+  {{#modal-dialog close="toggleModal"}}
+    <div class="modal-links">
+      Close <button onclick={{action 'toggleModal'}} class="close">X</button>
+    </div>
+    <div class="modal-body">
+      <h1>{{meme.title}}</h1>    
+      <img class="meme" src={{full-url meme.image}}/>
+    </div>
   {{/modal-dialog}}
 {{/if}}

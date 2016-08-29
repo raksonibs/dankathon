@@ -1,4 +1,6 @@
 @import 'ember-paper';
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
 $background-colour: #000;
 $background-text-colour: #fff;
 $primary-button-colour: #e600c5;
@@ -226,3 +228,43 @@ md-progress-linear {
 }
 
 @import 'media_queries';
+
+.ember-modal-dialog {
+  color: $primary-button-colour;
+  text-align: center;
+  margin: auto;
+  // left: 0;
+  // top: 0;
+  margin: 0;
+  bottom: -20px;
+  transform: moveUp 1s;
+
+  img {
+    max-width: 75vw;
+    max-height: 75vh;
+  }
+  
+  .modal-body {
+    position: relative;
+    top: -40px;
+  }
+
+  .modal-links {
+    position: relative;
+    top: -40px;
+
+    button {
+      color: $primary-button-colour;
+      // background: $primary-button-colour-shadow;
+    }
+  }
+}
+
+@-webkit-keyframes moveUp {
+  0% { top: 0%; }
+  75% { top: 50%; }
+}
+@keyframes moveUp {
+  0% { top: 0%; }
+  75% { top: 50%; }
+}

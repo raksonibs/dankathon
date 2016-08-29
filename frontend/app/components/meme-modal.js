@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   tagName: 'div',
   actions: {
     toggleModal() {
-      this.set('isModalVisible', false);
+      this.toggleProperty('isModalVisible');
     }
   }
 });
