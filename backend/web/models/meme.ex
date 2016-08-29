@@ -1,8 +1,10 @@
 defmodule Backend.Meme do
   use Backend.Web, :model
+  require IEx
 
   schema "memes" do
     field :title, :string
+    field :slug, :string
     field :image, :string
     field :rating, :integer
 
@@ -19,6 +21,12 @@ defmodule Backend.Meme do
     struct
     |> cast(params, [:title, :image, :rating])
     |> validate_required([:title, :image, :rating])
+  end
+
+  def create_slug(meme) do 
+    slug = meme.title
+      |> String.replace(" ", "-")
+      |> String.downcase
   end
 
   # def count_tags() do 

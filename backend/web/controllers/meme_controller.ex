@@ -93,10 +93,14 @@ defmodule Backend.MemeController do
     number = round(:rand.uniform * 100000)
     random_string = Integer.to_string(number, 36)
     meme_file = params["file"].filename
-    meme = Repo.get_by(Meme, image: meme_file) || Repo.insert!(%Meme{image: meme_file, rating: 0, title: random_string})
+    slug = random_string
+      |> String.replace(" ", "-")
+      |> String.downcase
+    meme = Repo.get_by(Meme, image: meme_file) || Repo.insert!(%Meme{image: meme_file, rating: 0, title: random_string, slug: slug})
     Backend.Gif.store({params["file"], meme})
     image = Backend.Gif.url({meme_file, meme}, :original)
     image = Enum.join(["https://s3-us-west-2.amazonaws.com", Enum.at(String.split(image, ".com"), 1)])
+
     changeset = Meme.changeset(meme, %{image: image})
 
     case Repo.update(changeset) do
