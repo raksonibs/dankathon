@@ -1,7 +1,7 @@
 <img class="meme" src={{full-url meme.image}} onclick={{action 'toggleModal'}}/>
 
 {{#if isModalVisible}}
-  {{#modal-dialog close="toggleModal"}}
+  {{#modal-dialog container-class=animated close="toggleModal"}}
     <div class="modal-links">
       Close <button onclick={{action 'toggleModal'}} class="close">X</button>
     </div>
