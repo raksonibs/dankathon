@@ -9,9 +9,9 @@ defmodule Backend.TagView do
     %{data: render_one(tag, Backend.TagView, "tag.json")}
   end
 
-  def render("tag.json", %{tag: tag}) do
-    %{id: tag.id,
-      title: tag.title,
-      meme_id: tag.meme_id}
-  end
+  # def render("tag.json", %{tag: tag}) do
+  #   %{id: tag.id,
+  #     title: tag.title,
+  #     meme_id: tag.meme_id}
+  # end
 end

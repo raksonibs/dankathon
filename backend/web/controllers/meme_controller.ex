@@ -12,16 +12,6 @@ defmodule Backend.MemeController do
   alias Backend.Tag
 
   plug :scrub_params, "data" when action in [:create, :update]
-  plug :load_hash_tags when action in [:index, :show, :create, :update]
-  plug :load_tags when action in [:index, :show, :create, :update]
-
-  def meme_tags(meme) do 
-    assoc(meme, :tags)
-  end
-
-  def meme_hash_tags(meme) do 
-    assoc(meme, :hash_tags)
-  end
 
   # def action(conn, _) do 
   #   apply(__MODULE__, action_name(conn),
@@ -36,9 +26,8 @@ defmodule Backend.MemeController do
       query = from meme in Meme
     end
 
-    memes = Meme 
-            |> Meme.with_tags
-            |> Repo.all()
+    memes = Repo.all(Meme)
+            |> Repo.preload([:hash_tags, :tags])
 
     render(conn, "index.json", data: memes)
   end
@@ -114,24 +103,6 @@ defmodule Backend.MemeController do
         |> render(Backend.ChangesetView, "error.json", changeset: changeset)
     end
    
-  end
-
-  defp load_hash_tags(conn, _) do 
-    tags = load(HashTag)
-    assign(conn, :hash_tags, tags)
-  end
-
-  defp load_tags(conn, _) do 
-    tags = load(Tag)
-    assign(conn, :tags, tags)
-  end
-
-  def load(module_name) do 
-    query = module_name 
-      |> module_name.alphabetical
-      |> module_name.titles_and_ids 
-
-    tags = Repo.all query 
   end
 
 end

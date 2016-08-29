@@ -21,13 +21,13 @@ defmodule Backend.Meme do
     |> validate_required([:title, :image, :rating])
   end
 
-  def count_tags() do 
-    Repo.one from u in Meme,
-            join: v in assoc(u, :tags),
-            join: h in assoc(u, :hash_tags),
-            select: count(v.id)
-    # select: {v, h}
-  end
+  # def count_tags() do 
+  #   Repo.one from u in Meme,
+  #           join: v in assoc(u, :tags),
+  #           join: h in assoc(u, :hash_tags),
+  #           select: count(v.id)
+  #   # select: {v, h}
+  # end
 
   def with_tags(query) do 
     from q in query, preload: [:tags, :hash_tags]

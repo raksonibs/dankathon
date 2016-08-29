@@ -25,9 +25,9 @@ defmodule Backend.Gif do
     version
   end
 
-  def storage_dir(_, {file, meme}) do
-    "uploads/gifs/#{meme.id}"
-  end
+  # def storage_dir(_, {file, meme}) do
+  #   "uploads/gifs/#{meme.id}"
+  # end
 
   def default_url(:thumb) do
     "https://placehold.it/100x100"
