@@ -6,7 +6,7 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     apiNamespace: 'api',
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -24,22 +24,22 @@ module.exports = function(environment) {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    // ENV.APP.LOG_TRANSITIONS_INTERNAL =
     ENV['ember-cli-mirage'] = {
       enabled: false
     }
 
-     ENV.serverURL = 'http://localhost:4000';
+     ENV.serverURL = 'http://localhost:4000'; true;
+    // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   if (environment === 'test') {
     // Testem prefers this...
+    ENV.baseURL = '/';
+    ENV.locationType = 'none';
     ENV['ember-cli-mirage'] = {
       enabled: true
     }
-    ENV.baseURL = '/';
-    ENV.locationType = 'none';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
@@ -49,7 +49,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
   }
 
   ENV.apiBaseURL = ENV.serverURL + '/' + ENV.apiNamespace;
