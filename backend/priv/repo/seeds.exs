@@ -1,8 +1,8 @@
 # mix run priv/repo/seeds.exs
-# iex(3)> post = EctoBlog.Repo.get_by(EctoBlog.Post, title: "Hello")     
+# iex(3)> post = EctoBlog.Repo.get_by(EctoBlog.Post, title: "Hello")
 # iex(4)> changed_post = %{post | title: "Hello!"}
 # iex(5)> {:ok, updated_post} = EctoBlog.Repo.update(changed_post)
-# iex(6)> {:ok, deleted_post} = EctoBlog.Repo.delete(updated_post)   
+# iex(6)> {:ok, deleted_post} = EctoBlog.Repo.delete(updated_post)
 require IEx
 alias Backend.Repo
 alias Backend.Meme
@@ -13,15 +13,15 @@ repo_memes = Repo.all(Meme)
 hash_tags = Repo.all(HashTag)
 tags = Repo.all(Tag)
 
-for meme <- repo_memes do 
+for meme <- repo_memes do
   Repo.delete!(meme)
 end
 
-for ht <- hash_tags do 
+for ht <- hash_tags do
   Repo.delete!(ht)
 end
 
-for ht <- tags do 
+for ht <- tags do
   Repo.delete!(ht)
 end
 
@@ -38,7 +38,7 @@ for tag <- random_tags do
   Repo.get_by(Tag, title: tag) || Repo.insert!(%Tag{title: tag})
 end
 
-for meme <- memes do 
+for meme <- memes do
   number = round(:rand.uniform * 100000)
   random_string = Integer.to_string(number, 36)
   Repo.get_by(HashTag, title: random_string) || Repo.insert!(%HashTag{title: random_string})
@@ -52,7 +52,7 @@ for meme <- memes do
   # tags = Repo.all(Tag)
   # should these references be has_many_and_belongs_to, which ecto does not have
   # right now breaking for 1, 2, 3/ not sure why? on_replace with changeset
-  for x <- [1] do 
+  for x <- [1] do
     number_hash = round(:rand.uniform * length random_hash_tags)
     number_tag = round(:rand.uniform * length random_tags)
     ht = Enum.at(random_hash_tags, number_hash)
@@ -79,5 +79,5 @@ for meme <- memes do
     end
   end
 
-  
+
 end

@@ -12,6 +12,8 @@ defmodule Backend.Router do
   pipeline :api do
     # plug CORSPlug, [origin: "*"]
     plug :accepts, ["json", "json-api"]
+    # plug JaSerializer.ContentTypeNegotiation
+    plug JaSerializer.Deserializer
   end
 
   scope "/", Backend do

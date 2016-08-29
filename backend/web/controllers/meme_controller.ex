@@ -26,7 +26,8 @@ defmodule Backend.MemeController do
       query = from meme in Meme
     end
 
-    memes = Repo.all(Meme)
+    memes = query
+            |> Repo.all
             |> Repo.preload([:hash_tags, :tags])
 
     render(conn, "index.json", data: memes)
@@ -94,7 +95,10 @@ defmodule Backend.MemeController do
     meme_file = params["file"].filename
     meme = Repo.get_by(Meme, image: meme_file) || Repo.insert!(%Meme{image: meme_file, rating: 0, title: random_string})
     Backend.Gif.store({params["file"], meme})
-    changeset = Meme.changeset(meme, %{image: Backend.Gif.url({meme_file, meme}, :original)})
+    image = Backend.Gif.url({meme_file, meme}, :original)
+    image = Enum.join(["https://s3-us-west-2.amazonaws.com", Enum.at(String.split(image, ".com"), 1)])
+    changeset = Meme.changeset(meme, %{image: image})
+
     case Repo.update(changeset) do
       {:ok, meme}         -> render(conn, "show.json", data: meme)
       {:error, changeset} -> 

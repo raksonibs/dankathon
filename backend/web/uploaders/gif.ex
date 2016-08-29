@@ -9,7 +9,7 @@ defmodule Backend.Gif do
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
 
   def acl(:thumb, _), do: :public_read
-  def __storage, do: Arc.Storage.Local
+  # def __storage, do: Arc.Storage.Local
 
   def validate({file, _}) do   
     file_extension = file.file_name |> Path.extname |> String.downcase
@@ -25,9 +25,9 @@ defmodule Backend.Gif do
     version
   end
 
-  # def storage_dir(_, {file, meme}) do
-  #   "uploads/gifs/#{meme.id}"
-  # end
+  def storage_dir(_, {file, meme}) do
+    "badcomics/gifs/#{meme.id}"
+  end
 
   def default_url(:thumb) do
     "https://placehold.it/100x100"
@@ -43,7 +43,7 @@ defmodule Backend.Gif do
   #    :content_encoding, :content_length, :content_type,
   #    :expect, :expires, :storage_class, :website_redirect_location]
   #
-  # def s3_object_headers(version, {file, scope}) do
-  #   [content_type: Plug.MIME.path(file.file_name)]
-  # end
+  def s3_object_headers(version, {file, scope}) do
+    [content_type: Plug.MIME.path(file.file_name)]
+  end
 end

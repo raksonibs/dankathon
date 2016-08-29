@@ -29,6 +29,19 @@ config :phoenix, :format_encoders,
     "application/vnd.api+json" => ["json-api"]
   }
 
+config :arc,
+  bucket: "badcomics"
+
+config :ex_aws,
+  access_key_id: "",
+  secret_access_key: "",
+  region: "us-west-2"
+  # s3: [
+  #   scheme: "https://",
+  #   host: "s3.us-west-2.amazonaws.com",
+  #   region: 'us-west-2'
+  # ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
