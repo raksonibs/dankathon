@@ -10,6 +10,7 @@ Router.map(function() {
     this.route('show', { path: '/memes/:meme_id'});
   });
   this.route('upload');
+  this.route('dank');
 });
 
 export default Router;

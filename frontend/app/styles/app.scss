@@ -273,3 +273,40 @@ md-progress-linear {
   0% { top: 50%; }
   75% { top: 0%; }
 }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg); 
+  }
+}
+
+.dank-body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // margin: calc(40px);
+
+  &.make-dank {
+    -webkit-animation: color_change 1s infinite alternate;
+          -moz-animation: color_change 1s infinite alternate;
+          -ms-animation: color_change 1s infinite alternate;
+          -o-animation: color_change 1s infinite alternate;
+          animation: color_change 1s infinite alternate;
+    &.rotate {
+       -webkit-animation: rotate 5s infinite, color_change 1s infinite;
+          -moz-animation: rotate 5s infinite, color_change 1s infinite;
+          -ms-animation: rotate 5s infinite, color_change 1s infinite;
+          -o-animation: rotate 5s infinite, color_change 1s infinite;
+          animation: rotate 5s infinite, color_change 1s infinite;
+    }
+  }
+
+  textarea {
+    margin-top: 20px;
+  }
+}

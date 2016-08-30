@@ -1,0 +1,7 @@
+<div class="dank-body {{if super-dank 'make-dank' ''}} {{if rotate 'rotate' ''}}">  
+  <textarea 
+    value={{dankText}}
+    oninput={{route-action 'checkForDank' value="target.value"}}
+    placeholder="A nice day to dank?" 
+  />
+</div>
