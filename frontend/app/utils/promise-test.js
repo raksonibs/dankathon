@@ -1,10 +1,45 @@
 export class PromiseTest {
-  constructor(test) {
-    this.items = [];
+  constructor(items) {
+    this.items = items || [];
   }
 
   addItem(item) {
     this.items.push(item);
+  }
+
+  testImage(url, item) {
+    return new Promise(function (resolve, reject) {
+        var timeout = 5000;
+        var timer, img = new Image();
+        img.onerror = img.onabort = function () {
+            clearTimeout(timer);
+            // reject("error with this image: " + url);
+            resolve(undefined);
+        };
+        img.onload = function () {
+            clearTimeout(timer);
+            resolve(item);
+        };
+        // timer = setTimeout(function () {
+        //     // reset .src to invalid URL so it stops previous
+        //     // loading, but doesn't trigger new load
+        //     img.src = "//!!!!/test.jpg";
+        //     reject("timeout");
+        // }, timeout);
+
+        img.src = url;
+      });
+  }
+
+  cleanImages() {
+    console.log("cleaning images");
+    var thisState = this;
+    var promises = [];
+    thisState.items.forEach((image) => {
+      promises.push(this.testImage(image.toJSON().image, image));
+    });
+
+    return promises;
   }
 
   promiseAdd(item) {

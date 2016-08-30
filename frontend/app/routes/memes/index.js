@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { PromiseTest } from "../../utils/promise-test";
 
 export default Ember.Route.extend({
   queryParams: {
@@ -15,8 +16,17 @@ export default Ember.Route.extend({
     return this.store.query('meme', params);
   },
 
-  // setupController(controller, models) {
-  //   controller.set('memes', models.memes);
-  //   // controller.set('filteredMemes', models.filteredMemes);
-  // }
+  setupController(controller, models) {
+    var p = new PromiseTest(models.toArray());
+    var promises = p.cleanImages();
+
+    Promise.all(promises).then(function(success) {      
+      console.log("IT WORKED!");
+      var images = success.filter((image) => { return image !== undefined });
+      controller.set('model', images);
+    }, function(err) {
+      console.log('error over here', err);
+    })
+    // controller.set('filteredMemes', models.filteredMemes);
+  }
 });
