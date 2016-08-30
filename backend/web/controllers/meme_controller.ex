@@ -29,6 +29,7 @@ defmodule Backend.MemeController do
     memes = query
             |> Repo.all
             |> Repo.preload([:hash_tags, :tags])
+            |> Repo.paginate(page: params["page"], page_size:  params["per_page"])
 
     render(conn, "index.json", data: memes)
   end

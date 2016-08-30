@@ -21,7 +21,7 @@ defmodule Backend.Mixfile do
       mod: {Backend, []},
       applications: [
                       :phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                      :phoenix_ecto, :postgrex, :ex_aws, :httpoison, :poison, :hackney
+                      :phoenix_ecto, :postgrex, :ex_aws, :httpoison, :poison, :hackney, :scrivener_ecto
                     ]
     ]
   end
@@ -42,13 +42,14 @@ defmodule Backend.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:ja_serializer, "~> 0.9.0"},
+     {:ja_serializer, ">= 0.9.0"},
      {:cors_plug, "~> 1.1"},
      {:arc, "~> 0.5.2"},
-     {:ex_aws, "~> 0.4.10"}, # Required if using Amazon S3
-     {:httpoison, "~> 0.7"},  # Required if using Amazon S3
+     {:ex_aws, "~> 0.4.10"},
+     {:httpoison, "~> 0.7"}, 
      {:poison, "~> 1.2"},
-     {:hackney, "~> 1.6"}]   # Required if using Amazon S3]
+     {:hackney, "~> 1.6"},
+     {:scrivener_ecto, "~> 1.0", override: true}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
