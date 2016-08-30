@@ -5,8 +5,8 @@
 </div>
 
 <div id="masonry" class="memes">
-{{#each model as |meme|}}
-  {{#if (image-exists meme.image)}}
+  {{#each model as |meme|}}
+   
     <div class="panel">
       <div class="panel-content">
         {{meme-modal
@@ -15,7 +15,9 @@
         }}
       </div>
     </div>
-  {{/if}}
-{{/each}}
+  {{/each}}
+
 </div>
+
+{{infinity-loader infinityModel=model}}
 {{!-- MEMES END --}}

@@ -5,10 +5,10 @@ export default Ember.Controller.extend({
   title: "",
   isModalVisible: false,
   init() {
-    let promise = this.get('promise').start();
-    promise.addItem("test");
-    console.log(promise);
-    promise.addDelayedItem("cat");
-    console.log(promise);
+    // let promise = this.get('promise').start();
+    // promise.addItem("test");
+    // console.log(promise);
+    // promise.addDelayedItem("cat");
+    // console.log(promise);
   }
 });

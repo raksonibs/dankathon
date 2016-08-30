@@ -53,6 +53,7 @@
     "ember-gestures": "0.4.2",
     "ember-getowner-polyfill": "1.0.1",
     "ember-hammertime": "1.0.0",
+    "ember-infinity": "0.2.6",
     "ember-inspector": "2.0.0",
     "ember-load-initializers": "^0.5.1",
     "ember-metrics": "0.6.2",

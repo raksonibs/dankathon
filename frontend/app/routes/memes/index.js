@@ -1,19 +1,16 @@
 import Ember from 'ember';
 import { PromiseTest } from "../../utils/promise-test";
+import InfinityRoute from "ember-infinity/mixins/route";
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(InfinityRoute, {
   queryParams: {
     title: {
       refreshModel: true
     }
   },
-  model(params) {
-    // return Ember.RSVP.hash({
-    //   memes: this.store.findAll('meme')
-    //   // filteredMemes: this.store.query('meme', {title: 'c'})
-    // })
-
-    return this.store.query('meme', params);
+  model(params) { 
+    // return this.store.query('meme', params);
+    return this.infinityModel("meme", { perPage: 50, startPage: 1});
   },
 
   setupController(controller, models) {
@@ -28,5 +25,9 @@ export default Ember.Route.extend({
       console.log('error over here', err);
     })
     // controller.set('filteredMemes', models.filteredMemes);
+  },
+
+  afterModelUpdated(totalPages) {
+
   }
 });

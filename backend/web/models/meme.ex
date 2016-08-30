@@ -1,5 +1,6 @@
 defmodule Backend.Meme do
   use Backend.Web, :model
+  
   require IEx
 
   schema "memes" do
