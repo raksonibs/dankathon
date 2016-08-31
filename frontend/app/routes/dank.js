@@ -3,6 +3,10 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   darude: Ember.inject.service('darude-sandstorm'),
   trump: Ember.inject.service('darude-sandstorm'),
+  trumpGame: Ember.inject.service('trump'),
+  dankText: null,
+  catsAreDogs: false,
+  showTrump: false,
   darudeSong: Ember.computed('darude', function() {
     let darude = this.get('darude');
     darude.changeSong('/assets/darude.mp3');
@@ -14,10 +18,14 @@ export default Ember.Route.extend({
     trump.changeSong('/assets/airhorn.mp3');
     return trump;
   }),
+  trumpCount: Ember.computed('trumpGame', 'dankText', function() {
+    return this.get('dankText');
+  }),
   actions: {
     checkForDank(dankText) {
       let darude = this.get('darudeSong');
       let trump = this.get('trumpHorn');
+      let trumpGame = this.get('trumpGame');
 
       let dankTextSet = dankText.target.value;
 
@@ -33,23 +41,26 @@ export default Ember.Route.extend({
         this.controller.set('rotate', false);
       }
 
-      if (/darude/.exec(dankTextSet)) {        
-        darude.playSong();
-      } else {
-        darude.stopSong();
+      if ('trump' === dankTextSet || dankTextSet.match(/trump/g).length >= 2) {        
+        var outcome = trumpGame.setTrumpCount(dankTextSet.match(/trump/g).length);
+        if (outcome !== false) {          
+          this.controller.set(outcome["key"], outcome["value"]);
+        }
       }
 
-      if (/trump/.exec(dankTextSet)) {        
-        darude.playSong();
-      } else {
-        darude.stopSong();
-      }
+      // if (/darude/.exec(dankTextSet)) {        
+      //   darude.playSong();
+      // } else {
+      //   darude.stopSong();
+      // }
 
-      if (/wall/.exec(dankTextSet)) {        
-        game.buildWallStart();
-      } else {
-        game.buildWallStop();
-      }
+      // if (/trump/.exec(dankTextSet)) {        
+      //   trump.playSong();
+      // } else {
+      //   trump.stopSong();
+      // }
+
+
     }
   }
 });

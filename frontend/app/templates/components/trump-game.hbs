@@ -1,0 +1,30 @@
+<div class="trumps">
+  {{#if showTrump}}
+    <img class="one trump" src="/assets/trump-stare.png" alt="">
+  {{/if}}
+
+  {{#if manyTrumps}}
+    <img class="two trump" src="/assets/trump-askance.png" alt="">
+    <img class="three trump" src="/assets/trump-knows.png" alt="">
+    <img class="four trump" src="/assets/trump-throw.png" alt="">
+    <img class="five trump" src="/assets/trump-finger.png" alt="">
+  {{/if}}
+
+  {{#if fourTrumps}}
+    <img class="six trump" src="/assets/trump-point.png" alt="">
+  {{/if}}
+
+  {{#if buildTheWall}}
+    <div class="trump game">
+      <h1> Build the Wall? </h1>
+      <input type="checkbox" value="Yes"/>
+      <label for="">Yes</label>
+      <input type="checkbox" value="No"/>
+      <label for="">No</label>
+      <br />
+      <button type="submit">
+        Submit
+      </button>
+    </div>
+  {{/if}}
+</div>

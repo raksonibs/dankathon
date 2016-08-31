@@ -5,6 +5,7 @@ $background-colour: #000;
 $background-text-colour: #fff;
 $primary-button-colour: #e600c5;
 $primary-button-colour-shadow: #b10398;
+$trump-red: #da2020;
 
 body, html {
   margin: 0;
@@ -274,12 +275,72 @@ md-progress-linear {
   75% { top: 0%; }
 }
 
+@keyframes moveTrumpUp {
+  from {
+    top: 0;
+  }
+
+  to {
+    top: 40%;
+  }
+}
+
+@keyframes moveTrumpDown {
+  from {
+    top: 100%;
+  }
+
+  to {
+    top: 40%;
+  }
+}
+
+@keyframes moveTrumpRight {
+  from {
+    right: 100%;
+  }
+
+  to {
+    right: 0;
+  }
+}
+
+@keyframes moveTrumpLeft {
+  from {
+    right: -50%;
+  }
+
+  to {
+    right: 0;
+  }
+}
+
 @keyframes rotate {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg); 
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(2);
+  }
+}
+
+@keyframes evaporate {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 
@@ -304,9 +365,70 @@ md-progress-linear {
           -o-animation: rotate 5s infinite, color_change 1s infinite;
           animation: rotate 5s infinite, color_change 1s infinite;
     }
+
   }
 
   textarea {
     margin-top: 20px;
+    &.evaporate {
+      z-index: 10;
+      animation: evaporate 6s;
+      opacity: 1;
+    }
+  }
+}
+
+.trumps {
+  .trump {
+    position: fixed;
+    
+    &.one {
+      animation: moveTrumpUp 5s;
+      top: 40%;
+    }
+
+    &.two {
+      animation: moveTrumpUp 3s;
+      top: 40%;
+      right: 0;
+    }
+
+    &.three {
+      animation: moveTrumpDown 3s;
+      top: 40%;
+      right: 0;
+    }
+
+    &.four {
+      animation: moveTrumpRight 3s;
+      top: 40%;
+      right: 0; 
+    }
+
+    &.five {
+      animation: moveTrumpLeft 3s;
+      top: 70%;
+      right: -10%; 
+    }
+
+    &.six {
+      left: -50%;
+      top: 40%;
+      animation: scaleUp 5s;
+      transform: scale(2);
+    }
+
+    &.game {
+      width: 90%;
+      height: 90%;
+      border-radius: 10px;
+      background: $trump-red;
+      animation: rotate 1s;
+      top: 10%;
+      left: 5%;
+      padding: 50px 20px;
+      z-index: 11;
+    }
+
   }
 }

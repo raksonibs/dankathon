@@ -3,9 +3,9 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   song: null,
   playingSong: null,
-  init() {
+  init(song) {
     this._super(...arguments);
-    this.set('song', '/assets/darude.mp3');
+    this.set('song', '');
     this.set('playingSong', new Audio(this.get('song')));
   },
 

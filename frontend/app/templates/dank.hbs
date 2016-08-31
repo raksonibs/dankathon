@@ -2,6 +2,14 @@
   <textarea 
     value={{dankText}}
     oninput={{route-action 'checkForDank' value="target.value"}}
+    class="{{if fourTrumps 'evaporate' ''}}"
     placeholder="A nice day to dank?" 
   />
 </div>
+
+{{trump-game
+  showTrump=showTrump
+  manyTrumps=manyTrumps
+  fourTrumps=fourTrumps
+  buildTheWall=buildTheWall
+}}
