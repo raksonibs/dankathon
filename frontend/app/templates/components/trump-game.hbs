@@ -17,14 +17,16 @@
   {{#if buildTheWall}}
     <div class="trump game">
       <h1> Build the Wall? </h1>
-      <input type="checkbox" value="Yes"/>
-      <label for="">Yes</label>
-      <input type="checkbox" value="No"/>
-      <label for="">No</label>
-      <br />
-      <button type="submit">
-        Submit
-      </button>
+      <form {{action "buildingWallComp" on="submit"}}>
+        {{input type="checkbox" name="yes" checked=yes}}
+        <label for="">Yes</label>
+        {{input type="checkbox" name="no" checked=no}}
+        <label for="">No</label>
+        <br />
+        <button type="submit">
+          Submit
+        </button>
+      </form>
     </div>
   {{/if}}
 </div>

@@ -22,6 +22,22 @@ export default Ember.Route.extend({
     return this.get('dankText');
   }),
   actions: {
+    buildingWall(result) {
+      let darude = this.get('darudeSong');
+      darude.changeSong('/assets/darude.mp3');
+      if (result.yes) {
+         this.controller.set('buildTheWall', false);
+         this.controller.set('showTrump', false);
+         this.controller.set('manyTrump', false);
+         this.controller.set('fourTrumps', false);
+         this.controller.set('super-dank', true);
+         this.controller.set('rotate', true);
+         this.controller.set('consumeTrumps', true);
+         darude.playSong();
+      } else {
+
+      }      
+    },
     checkForDank(dankText) {
       let darude = this.get('darudeSong');
       let trump = this.get('trumpHorn');
